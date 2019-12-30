@@ -31,7 +31,11 @@ export default class Home extends Component {
     const clickedFeature =
       features && features.find(f => f.layer.source === 'my-data');
     console.log(clickedFeature);
-    this.setState({ selectedIndex: clickedFeature.id });
+    if (clickedFeature && clickedFeature.id) {
+      this.setState({
+        selectedIndex: clickedFeature.id
+      });
+    }
   };
 
   render() {
