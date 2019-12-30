@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
-import fs from 'fs-extra';
 import Select from 'react-select';
 
 require('dotenv').config();
@@ -34,20 +33,13 @@ export default class Map extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const filePath =
-      '/Users/kyle/github/mapping/nst-guide/create-database/nst-guide-web-photos.geojson';
-    fs.readJSON(filePath).then(data => {
-      return this.setState({ geojsonData: data });
-    });
-  }
-
   handleChange = mapStyle => {
     this.setState({ mapStyle });
   };
 
   render() {
-    const { geojsonData, viewport, mapStyle } = this.state;
+    const { viewport, mapStyle } = this.state;
+    const { geojsonData } = this.props;
     return (
       <div>
         <Select

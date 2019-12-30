@@ -2,24 +2,22 @@ import React from 'react';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
 import fs from 'fs-extra';
 import Select from 'react-select';
+import execa from 'execa';
 
-require('dotenv').config();
-
-const mapStyleOptions = [
-  {
-    value:
-      'https://raw.githubusercontent.com/nst-guide/osm-liberty-topo/gh-pages/style.json',
-    label: 'OSM Liberty Topo'
-  },
-  { value: 'mapbox://styles/mapbox/outdoors-v11', label: 'Mapbox Outdoors' },
-  {
-    value: 'mapbox://styles/mapbox/satellite-streets-v11',
-    label: 'Mapbox Satellite Streets'
-  }
-];
+// (async () => {
+//   const { stdout } = await execa('echo', ['unicorns']);
+//   console.log(stdout);
+//   //=> 'unicorns'
+// })();
 
 export default class Map extends React.Component {
+  convertImage = imagePath => {
+
+  }
+
+
   render() {
-    return <img src={this.props.path} alt="Error loading" height={400} />;
+    const {path} = this.props;
+    return <img src={path} alt="Error loading" height={400} />;
   }
 }
