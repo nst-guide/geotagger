@@ -21,7 +21,6 @@ export default class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      geojsonData: null,
       viewport: {
         width: 600,
         height: 600,
