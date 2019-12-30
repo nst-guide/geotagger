@@ -1,12 +1,6 @@
 import React from 'react';
 import ReactMapGL, { Source, Layer } from 'react-map-gl';
-// var electron = require('electron');
-// // var electron = window.require("electron");
-const fs = require('fs-extra');
-
-// import fs from "fs";
-
-require('dotenv').config();
+import fs from 'fs-extra';
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -32,12 +26,11 @@ export default class Map extends React.Component {
   }
 
   render() {
-    const { geojsonData } = this.state;
+    const { geojsonData, viewport } = this.state;
     return (
       <ReactMapGL
-        {...this.state.viewport}
-        mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
-        mapStyle="mapbox://styles/mapbox/outdoors-v11"
+        {...viewport}
+        mapStyle="https://raw.githubusercontent.com/nst-guide/osm-liberty-topo/gh-pages/style.json"
         onViewportChange={viewport => this.setState({ viewport })}
       >
         <Source id="my-data" type="geojson" data={geojsonData}>
