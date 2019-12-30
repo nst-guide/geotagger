@@ -43,9 +43,7 @@ export default class Map extends React.Component {
   }
 
   handleChange = mapStyle => {
-    this.setState({ mapStyle }, () =>
-      console.log(`Option selected:`, this.state.mapStyle)
-    );
+    this.setState({ mapStyle });
   };
 
   render() {
