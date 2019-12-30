@@ -38,7 +38,7 @@ export default class Map extends React.Component {
 
   render() {
     const { viewport, mapStyle } = this.state;
-    const { geojsonData } = this.props;
+    const { geojsonData, onClick } = this.props;
     return (
       <div>
         <Select
@@ -51,6 +51,7 @@ export default class Map extends React.Component {
           mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
           mapStyle={mapStyle.value}
           onViewportChange={viewport => this.setState({ viewport })}
+          onClick={onClick}
         >
           <Source id="my-data" type="geojson" data={geojsonData}>
             <Layer type="circle" />

@@ -8,8 +8,6 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imagePath:
-        '/Users/kyle/Pictures/Photos Library.photoslibrary/originals/A/A1DFEE5C-483C-4B7A-990F-37B4F7CC0728.jpeg',
       photosGeojson: null,
       selectedIndex: null
     };
@@ -18,10 +16,23 @@ export default class Home extends Component {
   componentDidMount() {
     const filePath =
       '/Users/kyle/github/mapping/nst-guide/create-database/photos.json';
-    fs.readJSON(filePath).then(data => {
-      return this.setState({ photosGeojson: data });
-    });
+    fs.readJSON(filePath)
+      .then(data => {
+        return this.setState({ photosGeojson: data });
+      })
+      .catch(err => console.err(err));
   }
+
+  _onClick = event => {
+    const {
+      features,
+      srcEvent: { offsetX, offsetY }
+    } = event;
+    const clickedFeature =
+      features && features.find(f => f.layer.source === 'my-data');
+    console.log(clickedFeature);
+    this.setState({ selectedIndex: clickedFeature.id });
+  };
 
   render() {
     const { photosGeojson, selectedIndex } = this.state;
@@ -32,7 +43,11 @@ export default class Home extends Component {
     return (
       <div className={styles.container} data-tid="container">
         {photoPath && <MyImage path={photoPath} />}
-        <Map geojsonData={photosGeojson} />
+        <Map
+          geojsonData={photosGeojson}
+          onClick={this._onClick}
+          // onClick={() => console.log('clicked')}
+        />
       </div>
     );
   }
